@@ -9,7 +9,7 @@ This project was created as a learning exercise to practice:
 - Symfony Forms and validation
 - Basic CRUD application structure
 
-![Tasks list](docs/images/tasks-list.png)
+![Tasks list](docs/images/task-list.png)
 
 ## Features
 - Create, edit, delete tasks
