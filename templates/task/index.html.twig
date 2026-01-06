@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block body %}
+
+    <h1>Tasks</h1>
+
+    <a href="{{ path('task_new') }}">New Task</a>
+
+
+    {% if tasks is empty %}
+        <p>No tasks found.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Due date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td>                          
+                            <a href="{{ path('app_task_show', { id: task.id }) }}">
+                                {{ task.title }}
+                            </a>
+                        </td>
+
+                        <td>
+                            {{ task.description ?? '—' }}
+                        </td>
+
+                        <td>
+                            {% if task.isDone %}
+                                Done
+                            {% else %}
+                                Pending
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if task.dueAt %}
+                                {{ task.dueAt|date('Y-m-d H:i') }}
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

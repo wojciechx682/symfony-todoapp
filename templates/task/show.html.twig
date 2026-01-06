@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task details{% endblock %}
+
+{% block body %}
+
+    <h1>Task details</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ task.title }}</td>
+            </tr>
+
+            <tr>
+                <th>Description</th>
+                <td>{{ task.description ?? '—' }}</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+                <td>
+                    {% if task.isDone %}
+                        Done
+                    {% else %}
+                        Pending
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Created at</th>
+                <td>{{ task.createdAt|date('Y-m-d H:i') }}</td>
+            </tr>
+
+            <tr>
+                <th>Due at</th>
+                <td>
+                    {% if task.dueAt %}
+                        {{ task.dueAt|date('Y-m-d H:i') }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <form method="post" action="{{ path('task_toggle', {'id': task.id}) }}" style="display:inline;">
+            <button type="submit" style="background:none;border:none;padding:0;color:#ffb300;cursor:pointer;text-decoration:underline;">
+                {% if task.isDone %}
+                    Mark as Pending
+                {% else %}
+                    Mark as Done
+                {% endif %}
+            </button>
+        </form>
+        <br>
+        <a href="{{ path('task_edit', {'id': task.id}) }}">Edit</a>
+        <br>
+        <a href="{{ path('task_delete', {'id': task.id}) }}">Delete</a>
+        <br>
+        <a href="{{ path('app_task') }}">← Back to list</a>
+    </p>
+    
+{% endblock %}

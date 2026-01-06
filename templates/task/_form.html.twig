@@ -1,0 +1,17 @@
+{#  {{ form(form)}} #}
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}    
+
+    {{ form_errors(form) }}
+
+    {{ form_row(form.title) }}
+
+    {{ form_row(form.description) }}  
+
+    {{ form_row(form.dueAt) }}  
+
+    <br>
+
+    {{ form_row(form.save, {'label': 'Add New Task'}) }}
+
+{{ form_end(form) }}
